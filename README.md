@@ -20,6 +20,9 @@ Classification
         -Clicks: isolated, regular timingm echolocation
         -BPS:  grouped, less regular, communcation
       - Methods: Inter click intervals (ICIs), Envelope Shapes, Specteral centroid/flatness
+
+
+  Jan 11: Whistles, Clicks (00:00:00 - 00:08:00)
   
 
 
