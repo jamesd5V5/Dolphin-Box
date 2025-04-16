@@ -12,8 +12,8 @@ CLICK_FILES = os.path.join('Data', 'Clicks')
 n_fft = 2048
 hop_length = 512
 n_mels = 200
-cutoff_freq = 36000
 sample_rate = 48000
+cutoff_freq = sample_rate // 2 #36000  heloo
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
 
@@ -54,12 +54,6 @@ def loadDataset(directory, label):
             dataset.append((spec.numpy(), lbl))
     return dataset
 
-whistle_data = loadDataset(WHISTLE_FILES, label=1)
-click_data = loadDataset(CLICK_FILES, label=0)
-data = whistle_data + click_data
-
-print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks.")
-
 def plot_all_spectrograms(dataset, cols=4):
     rows = (len(dataset) + cols - 1) // cols
     plt.figure(figsize=(cols * 4, rows * 3))
@@ -74,4 +68,11 @@ def plot_all_spectrograms(dataset, cols=4):
     plt.close()
     print("Saved spectrogram grid to spectrogram_grid.png")
 
-plot_all_spectrograms(data)
+def get_all_spectrograms():
+    whistle_data = loadDataset(WHISTLE_FILES, label=1)
+    click_data = loadDataset(CLICK_FILES, label=0)
+    data = whistle_data + click_data
+    print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks.")
+    return data
+
+plot_all_spectrograms(get_all_spectrograms())

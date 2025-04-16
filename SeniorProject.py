@@ -2,16 +2,59 @@ import string
 import random
 import torch
 import torch.nn as nn
+import torch.optim as optim
 import matplotlib.pyplot as plt
 import numpy as np
 
-def get_random_seq():
-    seq_len = 128
+from RNN import RNNNet
+from torch.utils.data import DataLoader
 
-    t = np.arange(0, seq_len)
-    a = 2*np.pi*1.0/seq_len
-    b = 2*np.pi*np.random.rand()*5
-    seq = np.sin(a*t+b)
+from Dataset import SpectorgramDataset
+from DataExtraction import get_all_spectrograms
+
+#Load Dataset
+data = get_all_spectrograms()
+dataset = SpectorgramDataset(data)
+loader = DataLoader(dataset, batch_size=1, shuffle=True)
+
+input_size = dataset[0][0].shape[1] # number of mel bens
+model = RNNNet(input_size=input_size, hidden_size=128, num_classes=2)
+loss_func = nn.MSELoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+num_epochs = 10
+
+for epoch in range(num_epochs):
+    total_loss = 0
+    correct = 0
+    total = 0
+
+    for specs, labels in loader:
+        # specs: (batch, seq_len, input_size)
+        outputs = model(specs)  # (batch, num_classes)
+        loss = loss_func(outputs, labels)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        total_loss += loss.item()
+        _, predicted = torch.max(outputs, 1)
+        correct += (predicted == labels).sum().item()
+        total += labels.size(0)
+
+    acc = correct / total * 100
+    print(f"Epoch {epoch+1} | Loss: {total_loss:.4f} | Accuracy: {acc:.2f}%")
+
+'''
+def get_random_seq():
+
+    #seq_len = 128
+
+    #t = np.arange(0, seq_len)
+    #a = 2*np.pi*1.0/seq_len
+    #b = 2*np.pi*np.random.rand()*5
+    #seq = np.sin(a*t+b)
     return seq
 
 def get_input_and_target():
@@ -98,3 +141,4 @@ plt.xlabel("iters")
 plt.ylabel("loss")
 plt.plot(all_losses)
 plt.savefig("Training Loss Curve")
+'''
