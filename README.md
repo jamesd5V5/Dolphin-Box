@@ -9,7 +9,11 @@ Whistles, Clicks, BPs
     - Convert Newly generated spectorgrams back to audio using Griffin-Lim Algorithm
 
 Latent Space Creation:
-- PCA, t-SNE, UMAP, AE
+- VAE: dimsionality reduction (can be revetred unlike PCA, t-SNE)
+      - Encode: latent vector (maybe 32D)
+      - Latent Space
+      - Decode: Reconsturcuts the spectorgam from the latent Vecotr
+      - Back to Audio: Inversel mel or Griffin-Lim Algorithm
 - Could also do K-Means, DBSCAN, HDBSCAN for One vs all method
 Classification
 - One vs All: Whistles vs CLicks/BPs
@@ -22,7 +26,7 @@ Classification
       - Methods: Inter click intervals (ICIs), Envelope Shapes, Specteral centroid/flatness
 
 
-  Jan 11: Whistles, Clicks (00:00:00 - 00:08:00)
+  Jan 11: Whistles, Clicks
   
 
 
