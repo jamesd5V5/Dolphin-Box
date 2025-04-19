@@ -13,7 +13,7 @@ n_fft = 2048
 hop_length = 512
 n_mels = 200
 sample_rate = 48000
-cutoff_freq = sample_rate // 2 #36000  heloo
+cutoff_freq = sample_rate // 2 #36000  
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
 
