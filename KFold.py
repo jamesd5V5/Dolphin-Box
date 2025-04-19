@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, Subset
 from CNN import CNN
 from PrepData import PrepData
 from DataExtraction import get_all_spectrograms
-from WvsNw import train
+from WvsNW import train
 from WvsNW import get_predictions
 
 from sklearn.metrics import accuracy_score, classification_report
