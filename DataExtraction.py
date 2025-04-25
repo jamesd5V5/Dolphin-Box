@@ -3,10 +3,12 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 import numpy as np
 import librosa
+from collections import defaultdict
 
 # Paths
 WHISTLE_FILES = os.path.join('Data', 'Whistles')
 CLICK_FILES = os.path.join('Data', 'Clicks')
+BP_FILES = os.path.join('Data', 'BPs')
 
 # Audio processing params
 n_fft = 2048
@@ -55,12 +57,18 @@ def loadDataset(directory, label):
     return dataset
 
 def plot_all_spectrograms(dataset, cols=4):
+    label_map = {0: "Whistle", 1: "Click", 2: "Burst Pulse"}
+    label_counts = defaultdict(int)
+
     rows = (len(dataset) + cols - 1) // cols
     plt.figure(figsize=(cols * 4, rows * 3))
     for i, (spec, label) in enumerate(dataset[:cols * rows]):
+        label_counts[label] += 1
+        title = f"{label_map.get(label, 'Unknown')} #{label_counts[label]}"
+        
         plt.subplot(rows, cols, i + 1)
         plt.imshow(spec.T, aspect='auto', origin='lower', cmap='viridis')
-        plt.title("Whistle" if label == 1 else "Click")
+        plt.title(title)
         plt.axis("off")
     
     plt.tight_layout()
@@ -69,10 +77,11 @@ def plot_all_spectrograms(dataset, cols=4):
     print("Saved spectrogram grid to spectrogram_grid.png")
 
 def get_all_spectrograms():
-    whistle_data = loadDataset(WHISTLE_FILES, label=1)
-    click_data = loadDataset(CLICK_FILES, label=0)
-    data = whistle_data + click_data
-    print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks.")
+    whistle_data = loadDataset(WHISTLE_FILES, label=0)
+    click_data = loadDataset(CLICK_FILES, label=1)
+    bp_data = loadDataset(BP_FILES, label=2)
+    data = whistle_data + click_data + bp_data
+    print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks, {len(bp_data)} Bps")
     return data
 
 plot_all_spectrograms(get_all_spectrograms())
