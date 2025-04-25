@@ -10,6 +10,11 @@ BP_FILES = os.path.join('Data', 'BPs')
 
 label_map = {0: "Whistle", 1: "Click", 2: "Burst Pulse"}
 
+def rmsNormalize(audio, targetdBFS=-20):
+    rms = np.sqrt(np.mean(audio**2))
+    scaler = 10 ** (targetdBFS / 20) / (rms + 1e-6)
+    return audio * scaler
+
 def loadDataset(directory, label):
     dataset = []
     for fname in os.listdir(directory):
@@ -17,11 +22,12 @@ def loadDataset(directory, label):
             path = os.path.join(directory, fname)
             try:
                 y, sr = librosa.load(path, sr=None)
+                y = rmsNormalize(y, targetdBFS=-20)
                 if len(y) == 0:
                     print(f"Warning: {fname} is empty, skipping.")
                     continue
                 n_fft = 512 if len(y) < 2048 else 2048
-                mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13, n_fft=n_fft)
+                mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=39, n_fft=n_fft)
                 mean_mfcc = np.mean(mfcc, axis=1)
                 dataset.append((mean_mfcc, label))
 
@@ -43,13 +49,13 @@ y = np.array([entry[1] for entry in full_dataset])  # Labels
 output_csv = 'mfcc_dataset.csv'
 with open(output_csv, mode='w', newline='') as f:
     writer = csv.writer(f)
-    header = [f'mfcc_{i+1}' for i in range(13)] + ['label']
+    header = [f'mfcc_{i+1}' for i in range(39)] + ['label']
     writer.writerow(header)
 
     for features, label in full_dataset:
         writer.writerow(list(features) + [label])
 
-def computeClassStats(dataset, num_features=13):
+def computeClassStats(dataset, num_features=39):
     class_features = {}
     for features, label in dataset:
         if label not in class_features:
@@ -69,8 +75,8 @@ stats = computeClassStats(full_dataset)
 stats_csv = 'mfcc_class_stats.csv'
 with open(stats_csv, mode='w', newline='') as f:
     writer = csv.writer(f)
-    header = [f'mean_mfcc_{i+1}' for i in range(13)] + \
-             [f'std_mfcc_{i+1}' for i in range(13)] + ['label']
+    header = [f'mean_mfcc_{i+1}' for i in range(39)] + \
+             [f'std_mfcc_{i+1}' for i in range(39)] + ['label']
     writer.writerow(header)
 
     for label, (mean_vec, std_vec) in stats.items():
