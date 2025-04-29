@@ -13,7 +13,7 @@ class CNN(nn.Module):
         self._get_flattened_size()
 
         self.fc1 = nn.Linear(36800, 64)
-        self.fc2 = nn.Linear(64, 2)
+        self.fc2 = nn.Linear(64, 3)
 
     def _get_flattened_size(self):
         # Run dummy input through conv layers to get final shape

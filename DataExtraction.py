@@ -3,6 +3,9 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 import numpy as np
 import librosa
+import random
+import scipy.ndimage
+
 from collections import defaultdict
 
 # Paths
@@ -11,13 +14,14 @@ CLICK_FILES = os.path.join('Data', 'Clicks')
 BP_FILES = os.path.join('Data', 'BPs')
 
 # Audio processing params
-n_fft = 2048
-hop_length = 512
+n_fft = 2048  #1024
+hop_length = 512  #256
 n_mels = 200
 sample_rate = 48000
 cutoff_freq = sample_rate // 2 #36000  
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
+noise_threshold_db = -2 #-2 works best so far
 
 def loadMono(filename):
     file_contents = tf.io.read_file(filename)
@@ -44,7 +48,54 @@ def loadLogMelSpectrogram(wav, label):
 
     mel_spectrogram = tf.matmul(magnitude, mel_weights)
     log_mel_spectrogram = tf.math.log(mel_spectrogram + 1e-6)
+
+    noise_threshold = tf.constant(noise_threshold_db, dtype=tf.float32)
+    log_mel_spectrogram = tf.where(log_mel_spectrogram < noise_threshold, noise_threshold, log_mel_spectrogram)
+
+    log_mel_spectrogram = normalize(log_mel_spectrogram, method="minmax")
+    log_mel_spectrogram = remove_small_blobs(log_mel_spectrogram)
+
     return log_mel_spectrogram, label
+
+def split_audio_tf(audio, target_length, min_valid_length=None):
+    if min_valid_length is None:
+        min_valid_length = target_length // 2
+
+    segments = []
+    total_length = tf.shape(audio)[0]
+    num_segments = total_length // target_length
+
+    for i in range(num_segments):
+        segment = audio[i * target_length : (i + 1) * target_length]
+        segments.append(segment)
+
+    leftover = total_length % target_length
+    if leftover >= min_valid_length:
+        last_segment = audio[-leftover:]
+        padding = tf.zeros([target_length - leftover], dtype=tf.float32)
+        last_segment = tf.concat([last_segment, padding], 0)
+        segments.append(last_segment)
+
+    return segments
+
+def remove_small_blobs(spec, threshold=0.3, min_size=10):
+    # Threshold spectrogram to binary mask
+    binary_spec = (spec > threshold).numpy().astype(np.uint8)
+    
+    # Label connected components
+    labeled_array, num_features = scipy.ndimage.label(binary_spec)
+    
+    # Count sizes
+    sizes = np.bincount(labeled_array.ravel())
+    
+    # Remove small objects
+    mask_sizes = sizes >= min_size
+    mask_sizes[0] = 0  # Background always False
+    cleaned = mask_sizes[labeled_array]
+    
+    # Apply mask
+    cleaned_spec = spec * tf.convert_to_tensor(cleaned, dtype=tf.float32)
+    return cleaned_spec
 
 def loadDataset(directory, label):
     dataset = []
@@ -52,16 +103,29 @@ def loadDataset(directory, label):
         if fname.endswith('.wav'):
             path = os.path.join(directory, fname)
             wav = loadMono(path)
-            spec, lbl = loadLogMelSpectrogram(wav, label)
-            dataset.append((spec.numpy(), lbl))
+
+            # Split the audio into segments of min_samples length
+            segments = split_audio_tf(wav, min_samples)
+
+            for segment in segments:
+                spec, lbl = loadLogMelSpectrogram(segment, label)
+                dataset.append((spec.numpy(), lbl))
+
     return dataset
 
-def plot_all_spectrograms(dataset, cols=4):
+def normalize(spec, method="minmax"):
+    if method == "minmax":
+        return (spec - tf.reduce_min(spec)) / (tf.reduce_max(spec) - tf.reduce_min(spec) + 1e-6)
+    elif method == "standard":
+        return (spec - tf.reduce_mean(spec)) / (tf.math.reduce_std(spec) + 1e-6)
+    else:
+        return spec
+
+def plot_all_spectrograms(dataset, rows=6, cols=5):
     label_map = {0: "Whistle", 1: "Click", 2: "Burst Pulse"}
     label_counts = defaultdict(int)
 
-    rows = (len(dataset) + cols - 1) // cols
-    plt.figure(figsize=(cols * 4, rows * 3))
+    plt.figure(figsize=(cols * 5, rows * 3))
     for i, (spec, label) in enumerate(dataset[:cols * rows]):
         label_counts[label] += 1
         title = f"{label_map.get(label, 'Unknown')} #{label_counts[label]}"
@@ -76,12 +140,25 @@ def plot_all_spectrograms(dataset, cols=4):
     plt.close()
     print("Saved spectrogram grid to spectrogram_grid.png")
 
-def get_all_spectrograms():
+def get_each_spectrogram():
     whistle_data = loadDataset(WHISTLE_FILES, label=0)
     click_data = loadDataset(CLICK_FILES, label=1)
     bp_data = loadDataset(BP_FILES, label=2)
     data = whistle_data + click_data + bp_data
     print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks, {len(bp_data)} Bps")
-    return data
+    return whistle_data, click_data, bp_data
 
-plot_all_spectrograms(get_all_spectrograms())
+def get_all_spectrograms():
+    whistle_data, click_data, bp_data = get_each_spectrogram()
+    return whistle_data + click_data + bp_data
+
+def plot_random_spectrograms(sizePerClass=10):
+    whistle_data, click_data, bp_data = get_each_spectrogram()
+    whistle_samples = random.sample(whistle_data, min(sizePerClass, len(whistle_data)))
+    click_samples = random.sample(click_data, min(sizePerClass, len(click_data)))
+    bp_samples = random.sample(bp_data, min(sizePerClass, len(bp_data)))
+
+    samples_to_plot = whistle_samples + click_samples + bp_samples
+    plot_all_spectrograms(samples_to_plot)
+
+plot_random_spectrograms(10)
