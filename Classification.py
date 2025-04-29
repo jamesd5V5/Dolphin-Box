@@ -84,6 +84,7 @@ def get_predictions(model, dataloader):
 # Updated plot function for 3 classes
 def plot_confusion_matrix(y_true, y_pred, class_names=['Click', 'Whistle', 'Burst Pulse']):
     cm = confusion_matrix(y_true, y_pred, normalize='true')
+    print(cm)
     
     plt.figure(figsize=(7, 6))
     sns.heatmap(cm, annot=True, fmt='.2f', cmap='Blues',
