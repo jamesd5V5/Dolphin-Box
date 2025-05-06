@@ -27,7 +27,7 @@ train_data, test_data = train_test_split(
 class_counts = {0: 0, 1: 0, 2: 0}
 for _, label in test_data:
     class_counts[label] += 1
-print(f"Test set: {class_counts[0]} Clicks, {class_counts[1]} Whistles, {class_counts[2]} BPs")
+print(f"Test set: {class_counts[0]} Whistles, {class_counts[1]} Clicks, {class_counts[2]} BPs")
 
 # Define training function
 def train(model, dataloader, optimizer, criterion, epochs=10):
@@ -82,7 +82,7 @@ def get_predictions(model, dataloader):
     return np.array(all_labels), np.array(all_preds)
 
 # Updated plot function for 3 classes
-def plot_confusion_matrix(y_true, y_pred, class_names=['Click', 'Whistle', 'Burst Pulse']):
+def plot_confusion_matrix(y_true, y_pred, class_names=['Whistles', 'Clicks', 'BPs']):
     cm = confusion_matrix(y_true, y_pred, normalize='true')
     print(cm)
     
@@ -99,3 +99,6 @@ def plot_confusion_matrix(y_true, y_pred, class_names=['Click', 'Whistle', 'Burs
 # Evaluate model
 y_true, y_pred = get_predictions(model, test_loader)
 plot_confusion_matrix(y_true, y_pred)
+
+torch.save(model.state_dict(), 'dolp_classifier.pt')
+print("A new dolph_classifier.pt model as been created.")
