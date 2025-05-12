@@ -3,41 +3,38 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class CNN(nn.Module):
-    def __init__(self):
+    def __init__(self, input_size=10):  # 10 PCA components
         super(CNN, self).__init__()
         
-        # First conv block
-        self.conv1 = nn.Conv2d(1, 8, kernel_size=3, stride=2, padding=1)
-        self.bn1 = nn.BatchNorm2d(8)
+        # Fully connected layers for PCA input
+        self.fc1 = nn.Linear(input_size, 64)
+        self.bn1 = nn.BatchNorm1d(64)
+        self.dropout1 = nn.Dropout(0.3)
         
-        # Depthwise separable conv block
-        self.depthwise = nn.Conv2d(8, 8, kernel_size=3, padding=1, groups=8)
-        self.pointwise = nn.Conv2d(8, 16, kernel_size=1)
-        self.bn2 = nn.BatchNorm2d(16)
+        self.fc2 = nn.Linear(64, 32)
+        self.bn2 = nn.BatchNorm1d(32)
+        self.dropout2 = nn.Dropout(0.3)
         
-        # Global average pooling
-        self.gap = nn.AdaptiveAvgPool2d((1, 1))
-        
-        # Final classification layers
-        self.fc = nn.Linear(16, 3)
+        # Final classification layer
+        self.fc3 = nn.Linear(32, 3)
         
         self.activations = {}
 
     def forward(self, x):
-        # First conv block
-        x = F.relu(self.bn1(self.conv1(x)))
-        self.activations['conv1'] = x.detach().cpu()
+        # Ensure input is 2D [batch_size, features]
+        if len(x.shape) == 3:
+            x = x.squeeze(1)
         
-        # Depthwise separable conv
-        x = self.depthwise(x)
-        x = self.pointwise(x)
-        x = F.relu(self.bn2(x))
-        self.activations['conv2'] = x.detach().cpu()
+        # First FC block
+        x = F.relu(self.bn1(self.fc1(x)))
+        x = self.dropout1(x)
+        self.activations['fc1'] = x.detach().cpu()
         
-        # Global average pooling
-        x = self.gap(x)
-        x = x.view(x.size(0), -1)
+        # Second FC block
+        x = F.relu(self.bn2(self.fc2(x)))
+        x = self.dropout2(x)
+        self.activations['fc2'] = x.detach().cpu()
         
         # Classification
-        return self.fc(x)
+        return self.fc3(x)
 

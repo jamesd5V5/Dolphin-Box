@@ -5,15 +5,14 @@ import numpy as np
 import librosa
 import random
 import scipy.ndimage
-
+from sklearn.decomposition import PCA
 from collections import defaultdict
+import joblib
 
-# Paths
 WHISTLE_FILES = os.path.join('Data', 'Whistles')
 CLICK_FILES = os.path.join('Data', 'Clicks')
 BP_FILES = os.path.join('Data', 'BPs')
 
-# Audio processing params
 n_fft = 2048  #1024
 hop_length = 512  #256
 n_mels = 200
@@ -21,7 +20,9 @@ sample_rate = 48000
 cutoff_freq = sample_rate // 2 #36000  
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
-noise_threshold_db = -6 #-2 works best so far
+noise_threshold_db = -2 #-2 works best so far
+
+n_components = 50  # Using 50 components for better accuracy
 
 def loadMono(filename):
     file_contents = tf.io.read_file(filename)
@@ -99,7 +100,6 @@ def loadDataset(directory, label):
             path = os.path.join(directory, fname)
             wav = loadMono(path)
 
-            # Split the audio into segments of min_samples length
             segments = split_audio_tf(wav, min_samples)
 
             for segment in segments:
@@ -158,6 +158,34 @@ def get_all_spectrograms(cache_file='SpectrogramCache.npz'):
         np.savez_compressed(cache_file, spectrograms=specs, labels=labels)
         print(f"Saved processed spectrograms to {cache_file}")
         return all_data
+
+def apply_pca(specs, n_components=n_components):
+    flattened_specs = np.array([spec.flatten() for spec in specs])
+    
+    pca = PCA(n_components=n_components)
+    reduced_specs = pca.fit_transform(flattened_specs)
+    
+    return reduced_specs, pca
+
+def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_file='PCACache.npz'):
+    if os.path.exists(pca_cache_file):
+        print(f"Loading PCA components from {pca_cache_file}")
+        data = np.load(pca_cache_file, allow_pickle=True)
+        reduced_specs = data['reduced_specs']
+        labels = data['labels']
+        return list(zip(reduced_specs, labels))
+    else:
+        all_data = get_all_spectrograms(cache_file)
+        specs = [spec for spec, _ in all_data]
+        labels = [label for _, label in all_data]
+        
+        reduced_specs, pca = apply_pca(specs, n_components)
+        
+        np.savez_compressed(pca_cache_file, reduced_specs=reduced_specs, labels=labels)
+        joblib.dump(pca, 'PCAObject.joblib')
+        print(f"Saved PCA components to {pca_cache_file} and PCA object to PCAObject.joblib")
+        
+        return list(zip(reduced_specs, labels))
 
 def plot_random_spectrograms(sizePerClass=10):
     whistle_data, click_data, bp_data = get_each_spectrogram()
