@@ -78,22 +78,17 @@ def split_audio_tf(audio, target_length, min_valid_length=None):
 
     return segments
 
+#morphological filtering/ CCA (Connected Componnent analysis)
 def remove_small_blobs(spec, threshold=0.3, min_size=10):
-    # Threshold spectrogram to binary mask
     binary_spec = (spec > threshold).numpy().astype(np.uint8)
-    
-    # Label connected components
     labeled_array, num_features = scipy.ndimage.label(binary_spec)
-    
-    # Count sizes
+
     sizes = np.bincount(labeled_array.ravel())
-    
-    # Remove small objects
+
     mask_sizes = sizes >= min_size
-    mask_sizes[0] = 0  # Background always False
+    mask_sizes[0] = 0 
     cleaned = mask_sizes[labeled_array]
     
-    # Apply mask
     cleaned_spec = spec * tf.convert_to_tensor(cleaned, dtype=tf.float32)
     return cleaned_spec
 
@@ -148,9 +143,21 @@ def get_each_spectrogram():
     print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks, {len(bp_data)} Bps")
     return whistle_data, click_data, bp_data
 
-def get_all_spectrograms():
-    whistle_data, click_data, bp_data = get_each_spectrogram()
-    return whistle_data + click_data + bp_data
+def get_all_spectrograms(cache_file='SpectrogramCache.npz'):
+    if os.path.exists(cache_file):
+        print(f"Loading spectrograms from {cache_file}")
+        data = np.load(cache_file, allow_pickle=True)
+        specs = data['spectrograms']
+        labels = data['labels']
+        return list(zip(specs, labels))
+    else:
+        whistle_data, click_data, bp_data = get_each_spectrogram()
+        all_data = whistle_data + click_data + bp_data
+        specs = [spec for spec, _ in all_data]
+        labels = [label for _, label in all_data]
+        np.savez_compressed(cache_file, spectrograms=specs, labels=labels)
+        print(f"Saved processed spectrograms to {cache_file}")
+        return all_data
 
 def plot_random_spectrograms(sizePerClass=10):
     whistle_data, click_data, bp_data = get_each_spectrogram()
@@ -161,4 +168,4 @@ def plot_random_spectrograms(sizePerClass=10):
     samples_to_plot = whistle_samples + click_samples + bp_samples
     plot_all_spectrograms(samples_to_plot)
 
-plot_random_spectrograms(10)
+#plot_random_spectrograms(10)
