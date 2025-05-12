@@ -21,7 +21,7 @@ sample_rate = 48000
 cutoff_freq = sample_rate // 2 #36000  
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
-noise_threshold_db = -2 #-2 works best so far
+noise_threshold_db = -6 #-2 works best so far
 
 def loadMono(filename):
     file_contents = tf.io.read_file(filename)
