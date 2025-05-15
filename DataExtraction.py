@@ -196,4 +196,4 @@ def plot_random_spectrograms(sizePerClass=10):
     samples_to_plot = whistle_samples + click_samples + bp_samples
     plot_all_spectrograms(samples_to_plot)
 
-#plot_random_spectrograms(10)
+plot_random_spectrograms(10)

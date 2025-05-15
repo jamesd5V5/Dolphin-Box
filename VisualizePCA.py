@@ -62,4 +62,43 @@ ax.set_ylabel(f'PC2 ({pca_10d.explained_variance_ratio_[1]:.2%} variance)')
 ax.set_zlabel(f'PC3 ({pca_10d.explained_variance_ratio_[2]:.2%} variance)')
 plt.title('First 3 Principal Components')
 plt.savefig('pca_3d_top3.png')
-plt.close() 
+plt.close()
+
+def visualize_hidden_states(close_p, states, n_components, title="Time Series with Hidden States"):
+    """
+    Visualize time series data with hidden state assignments.
+    
+    Args:
+        close_p: Array of closing prices
+        states: Array of hidden state assignments
+        n_components: Number of hidden states
+        title: Main title for the plot
+    """
+    dates = np.arange(len(close_p))
+    
+    # Create figure with subplots
+    fig, axs = plt.subplots(n_components + 1, 1, figsize=(12, 3*(n_components + 1)), sharex=True)
+    fig.suptitle(title, fontsize=16)
+    
+    # Use a colormap for different states
+    colours = plt.cm.rainbow(np.linspace(0, 1, n_components))
+    
+    # Plot raw data
+    axs[0].plot(dates, close_p, 'k-', linewidth=1)
+    axs[0].set_title("Raw Time Series Data")
+    axs[0].grid(True)
+    axs[0].set_ylabel("Price")
+    
+    # Plot data colored by state
+    for i in range(n_components):
+        mask = states == i
+        axs[i+1].plot(dates[mask], close_p[mask], ".-", c=colours[i], linewidth=1)
+        axs[i+1].set_title(f"State {i}")
+        axs[i+1].grid(True)
+        axs[i+1].set_ylabel("Price")
+    
+    # Set x-axis label only on the bottom subplot
+    axs[-1].set_xlabel("Time")
+    
+    plt.tight_layout()
+    return fig 

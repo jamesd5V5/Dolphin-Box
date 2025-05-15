@@ -1,5 +1,21 @@
 ToDo
 
+Had: 2.37Million parameters
+Down: 403
+
+Orginally 50 components
+Variance explained by each component:
+PC1: 15.97%
+PC2: 9.09%
+PC3: 3.94%
+
+Total variance explained by 3 components: 28.99%
+This is quite revealing! The fact that 50 components explain the same variance as 3 components suggests that:
+Most of the important information is captured in the first few components
+
+
+
+
 Whistles, Clicks, BPs
 - Create Spectrogram Datset
     - Reduce Noise, Like Audaicty, follow Paper routine
