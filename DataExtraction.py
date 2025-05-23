@@ -24,6 +24,8 @@ noise_threshold_db = -2 #-2 works best so far
 
 n_components = 50  # Using 50 components for better accuracy
 
+TEMPERATURE = 1.0  # More confident predictions
+
 def loadMono(filename):
     file_contents = tf.io.read_file(filename)
     wav, sample_rate = tf.audio.decode_wav(file_contents, desired_channels=1)

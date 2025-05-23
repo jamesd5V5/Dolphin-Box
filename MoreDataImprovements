@@ -1,0 +1,95 @@
+Loaded 157 Whistles, 651 Clicks, 207 Bps -> Loaded 404 Whistles, 1018 Clicks, 535 Bps
+Whis 91% -> 82% (BPs)
+Clicks 100%
+BPs 85% -> 92% (Clicks)
+
+Class weights: tensor([0.3035, 0.0597, 0.6368])
+Epoch 1, Loss: 1.0344, Accuracy: 50.12%
+Epoch 2, Loss: 0.8428, Accuracy: 67.02%
+Epoch 3, Loss: 0.7292, Accuracy: 76.43%
+Epoch 4, Loss: 0.6385, Accuracy: 85.12%
+Epoch 5, Loss: 0.5962, Accuracy: 85.12%
+Epoch 6, Loss: 0.5372, Accuracy: 88.81%
+Epoch 7, Loss: 0.4915, Accuracy: 90.24%
+Epoch 8, Loss: 0.4414, Accuracy: 91.07%
+Epoch 9, Loss: 0.4209, Accuracy: 92.86%
+Epoch 10, Loss: 0.3659, Accuracy: 93.93%
+Confusion Matrix:
+[[123   0   5]
+ [  0 648   3]
+ [ 12   0  49]]
+ 
+ -> Class weights: tensor([0.4647, 0.1844, 0.3509])
+Epoch 1, Loss: 0.8427, Accuracy: 64.74%
+Epoch 2, Loss: 0.5831, Accuracy: 81.71%
+Epoch 3, Loss: 0.4778, Accuracy: 84.98%
+Epoch 4, Loss: 0.4089, Accuracy: 86.87%
+Epoch 5, Loss: 0.3756, Accuracy: 88.76%
+Epoch 6, Loss: 0.3389, Accuracy: 89.42%
+Epoch 7, Loss: 0.3031, Accuracy: 90.34%
+Epoch 8, Loss: 0.2993, Accuracy: 90.80%
+Epoch 9, Loss: 0.2996, Accuracy: 91.16%
+Epoch 10, Loss: 0.3008, Accuracy: 90.85%
+Confusion Matrix:
+[[393   0  11]
+ [  6 986  26]
+ [ 76   0 459]]
+ 
+ 
+TrackTest1.wav==================================
+W:1 CLs: Whistles: 0.09, Clicks: 0.21, BPs: 0.83
+W:2 CLs: Whistles: 0.51, Clicks: 0.42, BPs: 0.48
+W:3 CLs: Whistles: 0.40, Clicks: 0.27, BPs: 0.65
+W:4 CLs: Whistles: 0.45, Clicks: 0.22, BPs: 0.68
+W:5 CLs: Whistles: 0.45, Clicks: 0.12, BPs: 0.76
+W:6 CLs: Whistles: 0.29, Clicks: 0.40, BPs: 0.60
+W:7 CLs: Whistles: 0.67, Clicks: 0.37, BPs: 0.44
+W:8 CLs: Whistles: 0.70, Clicks: 0.19, BPs: 0.59
+TrackTest1.wav: ['BPs (0.83)', 'Unknown (all below 0.6)', 'BPs (0.65)', 'BPs (0.68)', 'BPs (0.76)', 'BPs (0.60)', 'Whistles (0.67)', 'Whistles (0.70)']
+TrackTest2.wav==================================
+W:1 CLs: Whistles: 0.60, Clicks: 0.23, BPs: 0.58
+W:2 CLs: Whistles: 0.52, Clicks: 0.17, BPs: 0.73
+W:3 CLs: Whistles: 0.60, Clicks: 0.31, BPs: 0.55
+W:4 CLs: Whistles: 0.31, Clicks: 0.78, BPs: 0.27
+TrackTest2.wav: ['Whistles (0.60)', 'BPs (0.73)', 'Whistles (0.60)', 'Clicks (0.78)']
+TrackTest3.wav==================================
+W:1 CLs: Whistles: 0.37, Clicks: 0.36, BPs: 0.63
+W:2 CLs: Whistles: 0.52, Clicks: 0.49, BPs: 0.44
+W:3 CLs: Whistles: 0.57, Clicks: 0.31, BPs: 0.57
+W:4 CLs: Whistles: 0.54, Clicks: 0.43, BPs: 0.48
+TrackTest3.wav: ['BPs (0.63)', 'Unknown (all below 0.6)', 'Unknown (all below 0.6)', 'Unknown (all below 0.6)']
+TrackTest4.wav==================================
+W:1 CLs: Whistles: 0.56, Clicks: 0.32, BPs: 0.57
+W:2 CLs: Whistles: 0.67, Clicks: 0.15, BPs: 0.66
+W:3 CLs: Whistles: 0.65, Clicks: 0.28, BPs: 0.54
+TrackTest4.wav: ['Unknown (all below 0.6)', 'Whistles & BPs (0.67, 0.66)', 'Whistles (0.65)']
+TrackTest5.wav==================================
+W:1 CLs: Whistles: 0.38, Clicks: 0.71, BPs: 0.32
+W:2 CLs: Whistles: 0.44, Clicks: 0.54, BPs: 0.42
+W:3 CLs: Whistles: 0.38, Clicks: 0.56, BPs: 0.44
+W:4 CLs: Whistles: 0.68, Clicks: 0.24, BPs: 0.57
+W:5 CLs: Whistles: 0.45, Clicks: 0.54, BPs: 0.43
+TrackTest5.wav: ['Clicks (0.71)', 'Unknown (all below 0.6)', 'Unknown (all below 0.6)', 'Whistles (0.68)', 'Unknown (all below 0.6)']
+
+Variance from component:
+PC1: 15.97%
+PC2: 9.09%
+PC3: 3.94%
+PC4: 3.55%
+PC5: 3.42%
+PC6: 3.21%
+PC7: 3.19%
+PC8: 3.02%
+PC9: 2.77%
+PC10: 2.72%
+
+PC1: 35.36%
+PC2: 10.96%
+PC3: 5.23%
+PC4: 4.02%
+PC5: 2.75%
+PC6: 1.97%
+PC7: 1.78%
+PC8: 1.71%
+PC9: 1.66%
+PC10: 1.56%

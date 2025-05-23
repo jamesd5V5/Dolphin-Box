@@ -4,24 +4,43 @@ import torch
 import tensorflow as tf
 import torch.nn.functional as F
 from CNN import CNN
+from MultiLabelCNN import MultiLabelCNN
 from DataExtraction import loadMono, loadLogMelSpectrogram, split_audio_tf, min_samples, apply_pca
 import numpy as np
 import joblib
+from collections import defaultdict
+from scipy.signal import butter, lfilter
 
-model = CNN(input_size=50)
-model.load_state_dict(torch.load('dolp_classifier.pt'))
+sample_rate = 48000
+
+# Temperature values to experiment with
+TEMPERATURES = [0.5, 1.0, 1.5, 2.0]
+
+model = MultiLabelCNN(input_size=50)
+model.load_state_dict(torch.load('multilabel_classifier.pt'))
 model.eval()
 
 class_names = ['Whistles', "Clicks", "BPs"]
-THRESHOLD = 0.6
+THRESHOLD = 0.55
+MIN_CONFIDENCE_DIFF = 0.15
 
 pca = joblib.load('PCAObject.joblib')
 
-def classify_wav(filepath):
+def highpass_filter(wav, sr, cutoff=1000, order=5):
+    nyq = 0.5 * sr
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='high', analog=False)
+    filtered_wav = lfilter(b, a, wav)
+    return filtered_wav
+
+def classify_wav(filepath, temperature):
     wav = loadMono(filepath)
+    wav = highpass_filter(wav.numpy(), sample_rate, cutoff=1000)
+    wav = tf.convert_to_tensor(wav, dtype=tf.float32)
     segments = split_audio_tf(wav, min_samples)
     
     predictions = []
+    all_probs = defaultdict(list)
     
     for index, segment in enumerate(segments):
         spec, _ = loadLogMelSpectrogram(segment, label=0)
@@ -32,21 +51,78 @@ def classify_wav(filepath):
         
         with torch.no_grad():
             output = model(input_tensor)
-            probs = torch.sigmoid(output)
-            present_classes = [class_names[i] for i, p in enumerate(probs[0]) if p.item() >= THRESHOLD]
-            print(f"W:{index+1} CLs:", ", ".join(f"{class_name}: {probs[0][i].item():.2f}" for i, class_name in enumerate(class_names)))
+            # Handle the output properly - ensure it's a tensor
+            if isinstance(output, tuple):
+                output = output[0]  # Take the first element if it's a tuple
+            # Apply temperature scaling
+            scaled_output = output / temperature
+            probs = torch.sigmoid(scaled_output)
+            
+            prob_values = probs[0].cpu().numpy()
+            sorted_indices = np.argsort(prob_values)[::-1]
+            
+            # Store probabilities for analysis
+            for i, class_name in enumerate(class_names):
+                all_probs[class_name].append(prob_values[i])
+            
+            if prob_values[sorted_indices[0]] - prob_values[sorted_indices[1]] >= MIN_CONFIDENCE_DIFF:
+                present_classes = [class_names[i] for i, p in enumerate(prob_values) 
+                                 if p >= THRESHOLD and p == prob_values[sorted_indices[0]]]
+            else:
+                present_classes = [class_names[i] for i, p in enumerate(prob_values) 
+                                 if p >= THRESHOLD]
+            
+            print(f"W:{index+1} CLs:", ", ".join(f"{class_name}: {prob_values[i]:.2f}" 
+                  for i, class_name in enumerate(class_names)))
 
             if present_classes:
-                predictions.append(f"{' & '.join(present_classes)} ({', '.join(f'{probs[0][i].item():.2f}' for i in range(len(class_names)) if probs[0][i].item() >= THRESHOLD)})")
+                class_probs = [f"{prob_values[i]:.2f}" for i in range(len(class_names)) 
+                             if prob_values[i] >= THRESHOLD]
+                predictions.append(f"{' & '.join(present_classes)} ({', '.join(class_probs)})")
             else:
                 predictions.append(f"Unknown (all below {THRESHOLD})")
     
-    return predictions
+    # Calculate average probabilities for each class
+    avg_probs = {class_name: np.mean(probs) for class_name, probs in all_probs.items()}
+    return predictions, avg_probs
 
-TRACK_FILES = os.path.join('Data', '_Tracks')
-for filename in os.listdir(TRACK_FILES):
-    if filename.endswith('.wav'):
-        filepath = os.path.join(TRACK_FILES, filename)
-        print(f"{filename}==================================")
-        preds = classify_wav(filepath)
-        print(f"{filename}: {preds}")
+def run_temperature_experiment():
+    TRACK_FILES = os.path.join('Data', '_Tracks')
+    results = {}
+    
+    for temperature in TEMPERATURES:
+        print(f"\n{'='*50}")
+        print(f"Testing with Temperature = {temperature}")
+        print(f"{'='*50}")
+        
+        file_results = {}
+        for filename in os.listdir(TRACK_FILES):
+            if filename.endswith('.wav'):
+                filepath = os.path.join(TRACK_FILES, filename)
+                print(f"\n{filename}==================================")
+                preds, avg_probs = classify_wav(filepath, temperature)
+                print(f"Predictions: {preds}")
+                print(f"Average probabilities: {avg_probs}")
+                file_results[filename] = {
+                    'predictions': preds,
+                    'average_probabilities': avg_probs
+                }
+        
+        results[temperature] = file_results
+    
+    return results
+
+if __name__ == "__main__":
+    results = run_temperature_experiment()
+    
+    # Print summary of results
+    print("\n\nTemperature Experiment Summary")
+    print("="*50)
+    for temperature in TEMPERATURES:
+        print(f"\nTemperature: {temperature}")
+        print("-"*30)
+        for filename, result in results[temperature].items():
+            print(f"\nFile: {filename}")
+            print(f"Average probabilities:")
+            for class_name, prob in result['average_probabilities'].items():
+                print(f"  {class_name}: {prob:.3f}")
