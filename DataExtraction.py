@@ -12,6 +12,7 @@ import joblib
 WHISTLE_FILES = os.path.join('Data', 'Whistles')
 CLICK_FILES = os.path.join('Data', 'Clicks')
 BP_FILES = os.path.join('Data', 'BPs')
+NOISE_FILES = os.path.join('Data', 'Noise')
 
 n_fft = 2048  #1024
 hop_length = 512  #256
@@ -119,7 +120,7 @@ def normalize(spec, method="minmax"):
         return spec
 
 def plot_all_spectrograms(dataset, rows=6, cols=5):
-    label_map = {0: "Whistle", 1: "Click", 2: "Burst Pulse"}
+    label_map = {0: "Whistle", 1: "Click", 2: "Burst Pulse", 3: "Noise"}
     label_counts = defaultdict(int)
 
     plt.figure(figsize=(cols * 5, rows * 3))
@@ -141,9 +142,10 @@ def get_each_spectrogram():
     whistle_data = loadDataset(WHISTLE_FILES, label=0)
     click_data = loadDataset(CLICK_FILES, label=1)
     bp_data = loadDataset(BP_FILES, label=2)
-    data = whistle_data + click_data + bp_data
-    print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks, {len(bp_data)} Bps")
-    return whistle_data, click_data, bp_data
+    noise_data = loadDataset(NOISE_FILES, label=3)
+    data = whistle_data + click_data + bp_data + noise_data
+    print(f"Loaded {len(whistle_data)} Whistles, {len(click_data)} Clicks, {len(bp_data)} Bps, {len(noise_data)} Noise")
+    return whistle_data, click_data, bp_data, noise_data
 
 def get_all_spectrograms(cache_file='SpectrogramCache.npz'):
     if os.path.exists(cache_file):
@@ -153,8 +155,8 @@ def get_all_spectrograms(cache_file='SpectrogramCache.npz'):
         labels = data['labels']
         return list(zip(specs, labels))
     else:
-        whistle_data, click_data, bp_data = get_each_spectrogram()
-        all_data = whistle_data + click_data + bp_data
+        whistle_data, click_data, bp_data, noise_data = get_each_spectrogram()
+        all_data = whistle_data + click_data + bp_data + noise_data
         specs = [spec for spec, _ in all_data]
         labels = [label for _, label in all_data]
         np.savez_compressed(cache_file, spectrograms=specs, labels=labels)
@@ -190,12 +192,13 @@ def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_f
         return list(zip(reduced_specs, labels))
 
 def plot_random_spectrograms(sizePerClass=10):
-    whistle_data, click_data, bp_data = get_each_spectrogram()
+    whistle_data, click_data, bp_data, noise_data = get_each_spectrogram()
     whistle_samples = random.sample(whistle_data, min(sizePerClass, len(whistle_data)))
     click_samples = random.sample(click_data, min(sizePerClass, len(click_data)))
     bp_samples = random.sample(bp_data, min(sizePerClass, len(bp_data)))
+    noise_samples = random.sample(noise_data, min(sizePerClass, len(noise_data)))
 
-    samples_to_plot = whistle_samples + click_samples + bp_samples
+    samples_to_plot = whistle_samples + click_samples + bp_samples + noise_samples
     plot_all_spectrograms(samples_to_plot)
 
 #plot_random_spectrograms(10)

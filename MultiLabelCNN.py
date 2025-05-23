@@ -20,10 +20,10 @@ class MultiLabelCNN(nn.Module):
         self.dropout3 = nn.Dropout(0.3)
         
         # Classification head (for primary classification)
-        self.class_head = nn.Linear(32, 3)
+        self.class_head = nn.Linear(32, 4)
         
         # Confidence head (for percentage/confidence scores)
-        self.confidence_head = nn.Linear(32, 3)
+        self.confidence_head = nn.Linear(32, 4)
         
         self.activations = {}
 

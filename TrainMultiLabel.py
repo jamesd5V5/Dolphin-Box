@@ -16,7 +16,7 @@ dataset = PrepData(data)
 dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
 
 # Convert single labels to multi-hot encoding
-def convert_to_multi_hot(labels, num_classes=3):
+def convert_to_multi_hot(labels, num_classes=4):
     multi_hot = torch.zeros((len(labels), num_classes))
     for i, label in enumerate(labels):
         multi_hot[i, label] = 1
@@ -24,12 +24,13 @@ def convert_to_multi_hot(labels, num_classes=3):
 
 # Convert labels to multi-hot encoding
 labels = [label for _, label in data]
-multi_hot_labels = convert_to_multi_hot(labels)
+multi_hot_labels = convert_to_multi_hot(labels, num_classes=4)
 
 # Calculate class weights for balanced training
 class_counts = multi_hot_labels.sum(dim=0)
 total_samples = len(labels)
-pos_weight = torch.tensor([2.0, 1.5, 2.0])  # [Whistle, Click, BP]
+# Increase Noise class weight to help model distinguish it
+pos_weight = torch.tensor([2.0, 1.5, 2.0, 4.0])  # [Whistle, Click, BP, Noise]
 print("Class weights:", pos_weight)
 
 # Initialize model and training components
@@ -90,15 +91,18 @@ for epoch in range(num_epochs):
     all_labels = np.array(all_labels)
     all_confidences = np.array(all_confidences)
     
-    # Calculate per-class metrics
-    for i, class_name in enumerate(['Whistle', 'Click', 'BP']):
+    output_line = ""
+    for i, class_name in enumerate(['W', 'CL', 'BP', 'N']):
         class_preds = all_preds == i
         class_labels = all_labels == i
         accuracy = (class_preds == class_labels).mean()
         precision = (class_preds & class_labels).sum() / (class_preds.sum() + 1e-6)
         recall = (class_preds & class_labels).sum() / (class_labels.sum() + 1e-6)
-        print(f'{class_name} - Accuracy: {accuracy:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}')
-        print(f'{class_name} - Average Confidence: {all_confidences[:, i].mean():.4f}')
+        avg_confidence = all_confidences[:, i].mean()
+        output_line += f"{class_name}: [A({accuracy:.4f}), P({precision:.4f}), R({recall:.4f}), C({avg_confidence:.4f})], "
+
+    # Remove trailing comma and space, then print
+    print(output_line.rstrip(", "))
     
     # Update learning rate
     scheduler.step(epoch_loss)
@@ -134,11 +138,11 @@ all_confidences = np.array(all_confidences)
 
 # Print classification report
 print("\nClassification Report:")
-print(classification_report(all_labels, all_preds, target_names=['Whistle', 'Click', 'BP']))
+print(classification_report(all_labels, all_preds, target_names=['Whistle', 'Click', 'BP', 'Noise']))
 
 # Plot confusion matrices for each class
-class_names = ['Whistle', 'Click', 'BP']
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+class_names = ['Whistle', 'Click', 'BP', 'Noise']
+fig, axes = plt.subplots(1, 4, figsize=(20, 5))
 for i, (ax, class_name) in enumerate(zip(axes, class_names)):
     cm = multilabel_confusion_matrix(all_labels, all_preds)[i]
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax)
@@ -147,6 +151,18 @@ for i, (ax, class_name) in enumerate(zip(axes, class_names)):
     ax.set_ylabel('True')
 plt.tight_layout()
 plt.savefig('multilabel_confusion_matrices.png')
+plt.close()
+
+# Plot overall confusion matrix
+from sklearn.metrics import confusion_matrix
+cm_overall = confusion_matrix(all_labels, all_preds)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm_overall, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.title('Overall Confusion Matrix')
+plt.tight_layout()
+plt.savefig('overall_confusion_matrix.png')
 plt.close()
 
 # Save the final model

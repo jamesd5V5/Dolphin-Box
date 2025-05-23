@@ -17,10 +17,10 @@ sample_rate = 48000
 TEMPERATURES = [0.5, 1.0, 1.5, 2.0]
 
 model = MultiLabelCNN(input_size=50)
-model.load_state_dict(torch.load('multilabel_classifier.pt'))
+model.load_state_dict(torch.load('best_multilabel_classifier.pt'))
 model.eval()
 
-class_names = ['Whistles', "Clicks", "BPs"]
+class_names = ['Whistles', 'Clicks', 'BPs', 'Noise']
 THRESHOLD = 0.55
 MIN_CONFIDENCE_DIFF = 0.15
 
