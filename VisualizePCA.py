@@ -51,17 +51,81 @@ plt.tight_layout()
 plt.savefig('pca_components_heatmap.png')
 plt.close()
 
-#Plotted first 3 components
+# Plotted first 3 components for 4 classes
 fig = plt.figure(figsize=(12, 8))
 ax = fig.add_subplot(111, projection='3d')
-scatter = ax.scatter(reduced_data_10d[:, 0], reduced_data_10d[:, 1], reduced_data_10d[:, 2],
-                    c=labels, cmap='viridis', alpha=0.6)
-plt.colorbar(scatter, label='Class')
+# Use a color map with 4 distinct colors
+colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red']
+class_names = ['Whistle', 'Click', 'BP', 'Noise']
+for class_idx, class_name in enumerate(class_names):
+    mask = labels == class_idx
+    ax.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+               c=colors[class_idx], label=class_name, alpha=0.6)
+plt.colorbar(ax.scatter([], [], [], c=[]), label='Class (see legend)')
 ax.set_xlabel(f'PC1 ({pca_10d.explained_variance_ratio_[0]:.2%} variance)')
 ax.set_ylabel(f'PC2 ({pca_10d.explained_variance_ratio_[1]:.2%} variance)')
 ax.set_zlabel(f'PC3 ({pca_10d.explained_variance_ratio_[2]:.2%} variance)')
-plt.title('First 3 Principal Components')
-plt.savefig('pca_3d_top3.png')
+plt.title('First 3 Principal Components (4 Classes)')
+ax.legend()
+plt.savefig('pca_3d_top3_4classes.png')
+plt.close()
+
+# 2x2 grid of 3D PCA plots: each class vs Noise, and all classes
+fig = plt.figure(figsize=(18, 14))
+
+class_names = ['Whistle', 'Click', 'BP', 'Noise']
+colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red']
+
+# (1) Whistle vs Noise
+ax1 = fig.add_subplot(2, 2, 1, projection='3d')
+for class_idx, class_name in [(0, 'Whistle'), (3, 'Noise')]:
+    mask = labels == class_idx
+    ax1.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+                c=colors[class_idx], label=class_name, alpha=0.6)
+ax1.set_title('Whistle vs Noise')
+ax1.set_xlabel('PC1')
+ax1.set_ylabel('PC2')
+ax1.set_zlabel('PC3')
+ax1.legend()
+
+# (2) Click vs Noise
+ax2 = fig.add_subplot(2, 2, 2, projection='3d')
+for class_idx, class_name in [(1, 'Click'), (3, 'Noise')]:
+    mask = labels == class_idx
+    ax2.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+                c=colors[class_idx], label=class_name, alpha=0.6)
+ax2.set_title('Click vs Noise')
+ax2.set_xlabel('PC1')
+ax2.set_ylabel('PC2')
+ax2.set_zlabel('PC3')
+ax2.legend()
+
+# (3) BP vs Noise
+ax3 = fig.add_subplot(2, 2, 3, projection='3d')
+for class_idx, class_name in [(2, 'BP'), (3, 'Noise')]:
+    mask = labels == class_idx
+    ax3.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+                c=colors[class_idx], label=class_name, alpha=0.6)
+ax3.set_title('BP vs Noise')
+ax3.set_xlabel('PC1')
+ax3.set_ylabel('PC2')
+ax3.set_zlabel('PC3')
+ax3.legend()
+
+# (4) All classes
+ax4 = fig.add_subplot(2, 2, 4, projection='3d')
+for class_idx, class_name in enumerate(class_names):
+    mask = labels == class_idx
+    ax4.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+                c=colors[class_idx], label=class_name, alpha=0.6)
+ax4.set_title('All Classes')
+ax4.set_xlabel('PC1')
+ax4.set_ylabel('PC2')
+ax4.set_zlabel('PC3')
+ax4.legend()
+
+plt.tight_layout()
+plt.savefig('pca_3d_grid_vs_noise.png')
 plt.close()
 
 def visualize_hidden_states(close_p, states, n_components, title="Time Series with Hidden States"):
