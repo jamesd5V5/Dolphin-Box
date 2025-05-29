@@ -5,7 +5,7 @@ import tensorflow as tf
 import torch.nn.functional as F
 from CNN import CNN
 from MultiLabelCNN import MultiLabelCNN
-from DataExtraction import loadMono, loadLogMelSpectrogram, split_audio_tf, min_samples, apply_pca
+from DataExtraction import loadMono, loadLogMelSpectrogram, split_audio_tf, min_samples, apply_pca, extract_mfcc
 import numpy as np
 import joblib
 from collections import defaultdict
@@ -15,8 +15,8 @@ sample_rate = 48000
 
 # Temperature values to experiment with
 TEMPERATURES = [0.5, 1.0, 1.5, 2.0]
-
-model = MultiLabelCNN(input_size=50)
+input_size = 50 + 7 # 50 PCA + 7 MFCC
+model = MultiLabelCNN(input_size=input_size)
 model.load_state_dict(torch.load('best_multilabel_classifier.pt'))
 model.eval()
 
@@ -41,13 +41,22 @@ def classify_wav(filepath, temperature):
     
     predictions = []
     all_probs = defaultdict(list)
+    segment_probs = []  # Store probabilities for each segment
     
     for index, segment in enumerate(segments):
         spec, _ = loadLogMelSpectrogram(segment, label=0)
         spec_np = spec.numpy()
         
+        # Get PCA features
         reduced_spec = pca.transform(spec_np.reshape(1, -1))
-        input_tensor = torch.tensor(reduced_spec, dtype=torch.float32)
+        
+        # Get MFCC features
+        mfcc_features = extract_mfcc(segment, n_mfcc=13, n_keep=7)
+        
+        # Concatenate PCA and MFCC features
+        combined_features = np.concatenate([reduced_spec, mfcc_features.reshape(1, -1)], axis=1)
+        
+        input_tensor = torch.tensor(combined_features, dtype=torch.float32)
         
         with torch.no_grad():
             output = model(input_tensor)
@@ -64,6 +73,14 @@ def classify_wav(filepath, temperature):
             # Store probabilities for analysis
             for i, class_name in enumerate(class_names):
                 all_probs[class_name].append(prob_values[i])
+            
+            # Store probabilities for this segment
+            segment_prob = {
+                "Whistle": round(float(prob_values[0]), 2),  # Whistles
+                "Click": round(float(prob_values[1]), 2),    # Clicks
+                "BP": round(float(prob_values[2]), 2)        # BPs
+            }
+            segment_probs.append(segment_prob)
             
             if prob_values[sorted_indices[0]] - prob_values[sorted_indices[1]] >= MIN_CONFIDENCE_DIFF:
                 present_classes = [class_names[i] for i, p in enumerate(prob_values) 
@@ -84,6 +101,12 @@ def classify_wav(filepath, temperature):
     
     # Calculate average probabilities for each class
     avg_probs = {class_name: np.mean(probs) for class_name, probs in all_probs.items()}
+    
+    # Save segment probabilities to JSON
+    import json
+    with open('results.json', 'w') as f:
+        json.dump(segment_probs, f)
+    
     return predictions, avg_probs
 
 def run_temperature_experiment():

@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class MultiLabelCNN(nn.Module):
-    def __init__(self, input_size=50):
+    def __init__(self, input_size=63):
         super(MultiLabelCNN, self).__init__()
         
         # Shared layers

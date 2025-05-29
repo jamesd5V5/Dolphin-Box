@@ -9,6 +9,7 @@ import numpy as np
 from sklearn.metrics import multilabel_confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
+import librosa
 
 # Load and prepare data
 data = get_all_spectrograms_with_pca()
@@ -34,7 +35,8 @@ pos_weight = torch.tensor([2.0, 1.5, 2.0, 4.0])  # [Whistle, Click, BP, Noise]
 print("Class weights:", pos_weight)
 
 # Initialize model and training components
-model = MultiLabelCNN(input_size=50)
+input_size = 50 + 7 # 50 PCA + 7 MFCC
+model = MultiLabelCNN(input_size=input_size)
 # Use CrossEntropyLoss for classification and BCEWithLogitsLoss for confidence
 class_criterion = nn.CrossEntropyLoss(weight=pos_weight)
 conf_criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
@@ -166,4 +168,13 @@ plt.savefig('overall_confusion_matrix.png')
 plt.close()
 
 # Save the final model
-torch.save(model.state_dict(), 'multilabel_classifier.pt') 
+torch.save(model.state_dict(), 'multilabel_classifier.pt')
+
+def extract_mfcc(segment, sample_rate=48000, n_mfcc=13):
+    if hasattr(segment, 'numpy'):
+        segment = segment.numpy()
+    segment = np.array(segment, dtype=np.float32)
+    mfccs = librosa.feature.mfcc(y=segment, sr=sample_rate, n_mfcc=n_mfcc)
+    mfccs_mean = np.mean(mfccs, axis=1)
+    mfccs_mean = np.squeeze(mfccs_mean)  # Ensure 1D
+    return mfccs_mean 

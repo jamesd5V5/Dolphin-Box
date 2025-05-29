@@ -171,25 +171,40 @@ def apply_pca(specs, n_components=n_components):
     
     return reduced_specs, pca
 
-def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_file='PCACache.npz'):
+def extract_mfcc(segment, sample_rate=48000, n_mfcc=13, n_keep=7):
+    if hasattr(segment, 'numpy'):
+        segment = segment.numpy()
+    segment = np.array(segment, dtype=np.float32)
+    mfccs = librosa.feature.mfcc(y=segment, sr=sample_rate, n_mfcc=n_mfcc)
+    mfccs_mean = np.mean(mfccs, axis=1)  # shape (n_mfcc,)
+    mfccs_mean = np.squeeze(mfccs_mean)
+    mfccs_mean = mfccs_mean[:n_keep]  # Keep only the first n_keep coefficients
+    return mfccs_mean
+
+def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_file='PCACache.npz', n_mfcc=13, n_keep=7):
     if os.path.exists(pca_cache_file):
         print(f"Loading PCA components from {pca_cache_file}")
         data = np.load(pca_cache_file, allow_pickle=True)
         reduced_specs = data['reduced_specs']
         labels = data['labels']
-        return list(zip(reduced_specs, labels))
+        # Load MFCCs if present
+        if 'mfccs' in data:
+            mfccs = data['mfccs']
+            features = [np.concatenate([pca_feat, np.squeeze(mfcc_feat)[:n_keep]]) for pca_feat, mfcc_feat in zip(reduced_specs, mfccs)]
+            return list(zip(features, labels))
+        else:
+            return list(zip(reduced_specs, labels))
     else:
         all_data = get_all_spectrograms(cache_file)
         specs = [spec for spec, _ in all_data]
         labels = [label for _, label in all_data]
-        
         reduced_specs, pca = apply_pca(specs, n_components)
-        
-        np.savez_compressed(pca_cache_file, reduced_specs=reduced_specs, labels=labels)
+        mfccs = [extract_mfcc(spec, n_mfcc=n_mfcc, n_keep=n_keep) for spec in specs]
+        np.savez_compressed(pca_cache_file, reduced_specs=reduced_specs, labels=labels, mfccs=mfccs)
         joblib.dump(pca, 'PCAObject.joblib')
-        print(f"Saved PCA components to {pca_cache_file} and PCA object to PCAObject.joblib")
-        
-        return list(zip(reduced_specs, labels))
+        print(f"Saved PCA components and MFCCs to {pca_cache_file} and PCA object to PCAObject.joblib")
+        features = [np.concatenate([pca_feat, np.squeeze(mfcc_feat)]) for pca_feat, mfcc_feat in zip(reduced_specs, mfccs)]
+        return list(zip(features, labels))
 
 def plot_random_spectrograms(sizePerClass=10):
     whistle_data, click_data, bp_data, noise_data = get_each_spectrogram()

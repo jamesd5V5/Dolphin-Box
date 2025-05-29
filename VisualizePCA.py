@@ -4,6 +4,8 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from DataExtraction import get_all_spectrograms_with_pca
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn.cluster import KMeans
+from collections import Counter
 
 data = get_all_spectrograms_with_pca()
 specs = np.array([spec for spec, _ in data])
@@ -67,7 +69,7 @@ ax.set_ylabel(f'PC2 ({pca_10d.explained_variance_ratio_[1]:.2%} variance)')
 ax.set_zlabel(f'PC3 ({pca_10d.explained_variance_ratio_[2]:.2%} variance)')
 plt.title('First 3 Principal Components (4 Classes)')
 ax.legend()
-plt.savefig('pca_3d_top3_4classes.png')
+plt.savefig('NEWER_pca_3d_top3_4classes.png')
 plt.close()
 
 # 2x2 grid of 3D PCA plots: each class vs Noise, and all classes
@@ -125,8 +127,43 @@ ax4.set_zlabel('PC3')
 ax4.legend()
 
 plt.tight_layout()
-plt.savefig('pca_3d_grid_vs_noise.png')
+plt.savefig('Newsest_pca_3d_grid_vs_noise.png')
 plt.close()
+
+# K-means clustering on the first 3 PCA components
+kmeans = KMeans(n_clusters=4, random_state=42)
+kmeans_labels = kmeans.fit_predict(reduced_data_10d[:, :3])
+
+# Plot k-means clusters in 3D
+fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111, projection='3d')
+cluster_colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red']
+for cluster_idx in range(4):
+    mask = kmeans_labels == cluster_idx
+    ax.scatter(reduced_data_10d[mask, 0], reduced_data_10d[mask, 1], reduced_data_10d[mask, 2],
+               c=cluster_colors[cluster_idx], label=f'Cluster {cluster_idx}', alpha=0.6)
+ax.set_xlabel('PC1')
+ax.set_ylabel('PC2')
+ax.set_zlabel('PC3')
+ax.set_title('K-means Clusters (k=4) in PCA Space')
+ax.legend()
+plt.tight_layout()
+plt.savefig('pca_3d_kmeans_clusters.png')
+plt.close()
+
+# Print cluster-to-class mapping and cluster sizes
+print('\nK-means cluster sizes:')
+for i in range(4):
+    print(f'Cluster {i}: {np.sum(kmeans_labels == i)} samples')
+
+print('\nCluster-to-class mapping (majority vote):')
+for i in range(4):
+    true_labels = labels[kmeans_labels == i]
+    if len(true_labels) > 0:
+        most_common = Counter(true_labels).most_common(1)[0]
+        print(f'Cluster {i}: Most common true class = {most_common[0]} (count={most_common[1]})')
+    else:
+        print(f'Cluster {i}: No samples')
 
 def visualize_hidden_states(close_p, states, n_components, title="Time Series with Hidden States"):
     """
