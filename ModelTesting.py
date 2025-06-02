@@ -3,7 +3,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import torch
 import tensorflow as tf
 import torch.nn.functional as F
-from CNN import CNN
 from MultiLabelCNN import MultiLabelCNN
 from DataExtraction import loadMono, loadLogMelSpectrogram, split_audio_tf, min_samples, apply_pca, extract_mfcc
 import numpy as np
