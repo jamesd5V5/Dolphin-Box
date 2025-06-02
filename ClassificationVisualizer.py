@@ -14,40 +14,28 @@ BAR_WIDTH = 10
 BAR_SPACING = 15
 MAX_BAR_HEIGHT = 30
 CLASS_NAMES = ['Whistle', 'Click', 'BP']
-DOLPHIN_SIZE = (42, 42)  # Twice as big as before (21 -> 42)
+DOLPHIN_SIZE = (42, 42) 
 
-# Load and prepare dolphin image
 dolphin = Image.open("rotating_dolphin_64x64.gif").convert('1').resize(DOLPHIN_SIZE)
 
 def create_frame(probabilities, window_num):
-    """Create a single frame showing classification probabilities."""
     image = Image.new('1', (device.width, device.height))
     draw = ImageDraw.Draw(image)
-
-    # Draw window number in top right corner
     draw.text((device.width - 30, 2), f'W{window_num}', fill=255)
-
-    # Draw dolphin in bottom right corner
     image.paste(dolphin, (device.width - DOLPHIN_SIZE[0], device.height - DOLPHIN_SIZE[1]))
 
     for i, class_name in enumerate(CLASS_NAMES):
         prob = probabilities.get(class_name, 0)
         x = i * (BAR_WIDTH + BAR_SPACING) + 10
         bar_height = int(prob * MAX_BAR_HEIGHT)
-        y = device.height - bar_height - 12  # Leave space for label
-
-        # Draw bar
+        y = device.height - bar_height - 12 
         draw.rectangle(
             [x, y, x + BAR_WIDTH, device.height - 12],
             outline=255,
             fill=255
         )
-
-        # Draw percentage above bar
         percentage = f"{int(prob * 100)}%"
         draw.text((x - 2, y - 10), percentage, fill=255)
-
-        # Draw short label below
         short_label = {
             'Whistle': 'Whs',
             'Click': 'Clk',
@@ -58,7 +46,6 @@ def create_frame(probabilities, window_num):
     return image
 
 def visualize_from_json(json_path):
-    """Visualize classification probabilities from a JSON file."""
     print(f"Loading classification data from: {json_path}")
     
     try:
@@ -77,7 +64,7 @@ def visualize_from_json(json_path):
             for i, probs in enumerate(segment_probs):
                 frame = create_frame(probs, i + 1)
                 device.display(frame)
-                time.sleep(0.125)  # Twice as fast (0.25 -> 0.125)
+                time.sleep(0.125)
     except KeyboardInterrupt:
         print("\nVisualization stopped by user")
 

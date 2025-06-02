@@ -6,7 +6,7 @@ from DataExtraction import get_all_spectrograms_with_pca
 from PrepData import PrepData
 from MultiLabelCNN import MultiLabelCNN
 import numpy as np
-from sklearn.metrics import multilabel_confusion_matrix, classification_report
+from sklearn.metrics import multilabel_confusion_matrix, classification_report, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 import librosa
@@ -42,6 +42,9 @@ class_criterion = nn.CrossEntropyLoss(weight=pos_weight)
 conf_criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 optimizer = optim.Adam(model.parameters(), lr=0.0005, weight_decay=1e-3)
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3, verbose=True)
+
+# Initialize lists to store metrics over time
+class_accuracies = {class_name: [] for class_name in ['Whistle', 'Click', 'BP', 'Noise']}
 
 # Training loop
 num_epochs = 40
@@ -94,7 +97,7 @@ for epoch in range(num_epochs):
     all_confidences = np.array(all_confidences)
     
     output_line = ""
-    for i, class_name in enumerate(['W', 'CL', 'BP', 'N']):
+    for i, class_name in enumerate(['Whistle', 'Click', 'BP', 'Noise']):
         class_preds = all_preds == i
         class_labels = all_labels == i
         accuracy = (class_preds == class_labels).mean()
@@ -102,6 +105,7 @@ for epoch in range(num_epochs):
         recall = (class_preds & class_labels).sum() / (class_labels.sum() + 1e-6)
         avg_confidence = all_confidences[:, i].mean()
         output_line += f"{class_name}: [A({accuracy:.4f}), P({precision:.4f}), R({recall:.4f}), C({avg_confidence:.4f})], "
+        class_accuracies[class_name].append(accuracy)
 
     # Remove trailing comma and space, then print
     print(output_line.rstrip(", "))
@@ -142,29 +146,33 @@ all_confidences = np.array(all_confidences)
 print("\nClassification Report:")
 print(classification_report(all_labels, all_preds, target_names=['Whistle', 'Click', 'BP', 'Noise']))
 
-# Plot confusion matrices for each class
-class_names = ['Whistle', 'Click', 'BP', 'Noise']
-fig, axes = plt.subplots(1, 4, figsize=(20, 5))
-for i, (ax, class_name) in enumerate(zip(axes, class_names)):
-    cm = multilabel_confusion_matrix(all_labels, all_preds)[i]
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax)
-    ax.set_title(f'{class_name} Confusion Matrix')
-    ax.set_xlabel('Predicted')
-    ax.set_ylabel('True')
-plt.tight_layout()
-plt.savefig('multilabel_confusion_matrices.png')
-plt.close()
+# Create a figure with two subplots
+plt.figure(figsize=(15, 6))
 
-# Plot overall confusion matrix
-from sklearn.metrics import confusion_matrix
+# First subplot: Confusion Matrix
+plt.subplot(1, 2, 1)
 cm_overall = confusion_matrix(all_labels, all_preds)
-plt.figure(figsize=(8, 6))
-sns.heatmap(cm_overall, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
+sns.heatmap(cm_overall, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Whistle', 'Click', 'BP', 'Noise'],
+            yticklabels=['Whistle', 'Click', 'BP', 'Noise'])
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.title('Overall Confusion Matrix')
+
+# Second subplot: Accuracy vs Time
+plt.subplot(1, 2, 2)
+epochs = range(1, num_epochs + 1)
+for class_name in ['Whistle', 'Click', 'BP', 'Noise']:
+    plt.plot(epochs, class_accuracies[class_name], label=class_name, marker='o')
+
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.title('Accuracy vs Time for Each Class')
+plt.legend()
+plt.grid(True)
+
 plt.tight_layout()
-plt.savefig('overall_confusion_matrix.png')
+plt.savefig('model_performance_metrics.png')
 plt.close()
 
 # Save the final model

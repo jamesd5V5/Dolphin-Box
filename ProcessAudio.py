@@ -2,7 +2,6 @@ import argparse
 from ModelTesting import classify_wav
 
 def process_audio_to_json(track_path, output_json, temperature=1.0):
-    """Process audio file and save classification results to JSON."""
     print(f"Processing track: {track_path}")
     predictions, avg_probs = classify_wav(track_path, temperature)
     print(f"Results saved to: {output_json}")
