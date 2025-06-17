@@ -1,1 +1,1922 @@
-[{"Whistle": 0.58, "Click": 0.12, "BP": 0.13}, {"Whistle": 0.59, "Click": 0.11, "BP": 0.13}, {"Whistle": 0.58, "Click": 0.15, "BP": 0.15}, {"Whistle": 0.6, "Click": 0.12, "BP": 0.15}, {"Whistle": 0.58, "Click": 0.14, "BP": 0.13}]
+[
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.68,
+        "Click": 0.0,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.66,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.76,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.75,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.72,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.41,
+        "Click": 0.05,
+        "BP": 0.2
+    },
+    {
+        "Whistle": 0.84,
+        "Click": 0.0,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.29,
+        "Click": 0.08,
+        "BP": 0.93
+    },
+    {
+        "Whistle": 0.33,
+        "Click": 0.05,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.88,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.85,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.72,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.74,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.75,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.76,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.01,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.21,
+        "Click": 0.46,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.27,
+        "Click": 0.19,
+        "BP": 0.3
+    },
+    {
+        "Whistle": 0.11,
+        "Click": 0.25,
+        "BP": 0.81
+    },
+    {
+        "Whistle": 0.4,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.74,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.74,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.74,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.72,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.27,
+        "Click": 0.1,
+        "BP": 0.41
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.8,
+        "Click": 0.0,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.67,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.66,
+        "Click": 0.0,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.76,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.48,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.75,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.67,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.66,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.15,
+        "Click": 0.28,
+        "BP": 0.79
+    },
+    {
+        "Whistle": 0.4,
+        "Click": 0.0,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.43,
+        "Click": 0.01,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.51,
+        "Click": 0.0,
+        "BP": 0.01
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.39,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.68,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.68,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.7,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.76,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.68,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.72,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.67,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.68,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.65,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.66,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.74,
+        "Click": 0.0,
+        "BP": 0.0
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.03,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.03,
+        "BP": 0.06
+    },
+    {
+        "Whistle": 0.45,
+        "Click": 0.18,
+        "BP": 0.34
+    },
+    {
+        "Whistle": 0.69,
+        "Click": 0.05,
+        "BP": 0.3
+    },
+    {
+        "Whistle": 0.39,
+        "Click": 0.23,
+        "BP": 0.78
+    },
+    {
+        "Whistle": 0.41,
+        "Click": 0.18,
+        "BP": 0.3
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.73,
+        "Click": 0.01,
+        "BP": 0.06
+    },
+    {
+        "Whistle": 0.71,
+        "Click": 0.01,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.03,
+        "BP": 0.06
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.08,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.34,
+        "Click": 0.48,
+        "BP": 0.27
+    },
+    {
+        "Whistle": 0.38,
+        "Click": 0.33,
+        "BP": 0.4
+    },
+    {
+        "Whistle": 0.26,
+        "Click": 0.37,
+        "BP": 0.67
+    },
+    {
+        "Whistle": 0.45,
+        "Click": 0.1,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.38,
+        "Click": 0.25,
+        "BP": 0.45
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.04,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.67,
+        "Click": 0.03,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.03,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.49,
+        "Click": 0.13,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.01,
+        "BP": 0.02
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.3,
+        "Click": 0.38,
+        "BP": 0.66
+    },
+    {
+        "Whistle": 0.45,
+        "Click": 0.05,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.46,
+        "Click": 0.09,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.5,
+        "Click": 0.04,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.45,
+        "Click": 0.04,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.02,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.02,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.02,
+        "BP": 0.05
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.01,
+        "BP": 0.04
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.01,
+        "BP": 0.03
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.07,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.06,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.07,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.06,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.06,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.05,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.08,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.47,
+        "Click": 0.27,
+        "BP": 0.39
+    },
+    {
+        "Whistle": 0.63,
+        "Click": 0.12,
+        "BP": 0.36
+    },
+    {
+        "Whistle": 0.43,
+        "Click": 0.31,
+        "BP": 0.7
+    },
+    {
+        "Whistle": 0.44,
+        "Click": 0.27,
+        "BP": 0.37
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.05,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.08,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.66,
+        "Click": 0.04,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.64,
+        "Click": 0.03,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.06,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.06,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.06,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.05,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.07,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.06,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.52,
+        "Click": 0.16,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.39,
+        "Click": 0.49,
+        "BP": 0.34
+    },
+    {
+        "Whistle": 0.42,
+        "Click": 0.38,
+        "BP": 0.43
+    },
+    {
+        "Whistle": 0.33,
+        "Click": 0.41,
+        "BP": 0.62
+    },
+    {
+        "Whistle": 0.47,
+        "Click": 0.19,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.05,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.07,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.06,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.04,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.04,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.42,
+        "Click": 0.33,
+        "BP": 0.47
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.11,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.09,
+        "BP": 0.27
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.03,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.06,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.49,
+        "Click": 0.22,
+        "BP": 0.27
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.06,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.03,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.04,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.03,
+        "BP": 0.07
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.36,
+        "Click": 0.42,
+        "BP": 0.61
+    },
+    {
+        "Whistle": 0.47,
+        "Click": 0.13,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.48,
+        "Click": 0.17,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.5,
+        "Click": 0.11,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.06,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.46,
+        "Click": 0.1,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.06,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.06,
+        "BP": 0.11
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.06,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.52,
+        "Click": 0.07,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.04,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.04,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.04,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.04,
+        "BP": 0.08
+    },
+    {
+        "Whistle": 0.58,
+        "Click": 0.04,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.05,
+        "BP": 0.09
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.06,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.05,
+        "BP": 0.1
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.15,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.13,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.11,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.13,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.11,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.11,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.1,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.1,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.11,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.12,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.14,
+        "BP": 0.2
+    },
+    {
+        "Whistle": 0.48,
+        "Click": 0.32,
+        "BP": 0.42
+    },
+    {
+        "Whistle": 0.6,
+        "Click": 0.19,
+        "BP": 0.39
+    },
+    {
+        "Whistle": 0.44,
+        "Click": 0.35,
+        "BP": 0.66
+    },
+    {
+        "Whistle": 0.46,
+        "Click": 0.32,
+        "BP": 0.4
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.1,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.14,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.12,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.52,
+        "Click": 0.14,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.62,
+        "Click": 0.08,
+        "BP": 0.21
+    },
+    {
+        "Whistle": 0.61,
+        "Click": 0.07,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.11,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.11,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.11,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.11,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.09,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.14,
+        "BP": 0.2
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.11,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.51,
+        "Click": 0.23,
+        "BP": 0.25
+    },
+    {
+        "Whistle": 0.42,
+        "Click": 0.49,
+        "BP": 0.38
+    },
+    {
+        "Whistle": 0.44,
+        "Click": 0.41,
+        "BP": 0.45
+    },
+    {
+        "Whistle": 0.37,
+        "Click": 0.43,
+        "BP": 0.59
+    },
+    {
+        "Whistle": 0.48,
+        "Click": 0.25,
+        "BP": 0.28
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.1,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.1,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.12,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.12,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.1,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.1,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.44,
+        "Click": 0.37,
+        "BP": 0.48
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.17,
+        "BP": 0.28
+    },
+    {
+        "Whistle": 0.59,
+        "Click": 0.15,
+        "BP": 0.32
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.07,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.15,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.1,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.49,
+        "Click": 0.27,
+        "BP": 0.32
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.09,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.12,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.08,
+        "BP": 0.13
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.07,
+        "BP": 0.12
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.09,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.39,
+        "Click": 0.44,
+        "BP": 0.58
+    },
+    {
+        "Whistle": 0.47,
+        "Click": 0.19,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.48,
+        "Click": 0.23,
+        "BP": 0.25
+    },
+    {
+        "Whistle": 0.5,
+        "Click": 0.17,
+        "BP": 0.22
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.47,
+        "Click": 0.17,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.11,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.12,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.52,
+        "Click": 0.11,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.52,
+        "Click": 0.12,
+        "BP": 0.17
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.53,
+        "Click": 0.13,
+        "BP": 0.18
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.09,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.1,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.14
+    },
+    {
+        "Whistle": 0.56,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.1,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.55,
+        "Click": 0.09,
+        "BP": 0.15
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.13,
+        "BP": 0.19
+    },
+    {
+        "Whistle": 0.54,
+        "Click": 0.11,
+        "BP": 0.16
+    },
+    {
+        "Whistle": 0.57,
+        "Click": 0.1,
+        "BP": 0.16
+    }
+]

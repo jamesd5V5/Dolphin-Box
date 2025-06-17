@@ -12,7 +12,7 @@ class PrepData(Dataset):
     
     def __getitem__(self, idx):
         spec, label = self.data[idx]
-        spec = np.expand_dims(spec, axis=0)  # [1, time, freq] for CNN
+        spec = np.expand_dims(spec, axis=0)
         spec = torch.tensor(spec, dtype=torch.float32)
         label = torch.tensor(label, dtype=torch.long)
         return spec, label

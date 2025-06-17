@@ -14,18 +14,17 @@ CLICK_FILES = os.path.join('Data', 'Clicks')
 BP_FILES = os.path.join('Data', 'BPs')
 NOISE_FILES = os.path.join('Data', 'Noise')
 
-n_fft = 2048  #1024
-hop_length = 512  #256
+n_fft = 2048
+hop_length = 512
 n_mels = 200
 sample_rate = 48000
-cutoff_freq = sample_rate // 2 #36000  
+cutoff_freq = sample_rate // 2
 duration = 1 #seconds
 min_samples = int(duration * sample_rate)
 noise_threshold_db = -2 #-2 works best so far
 
-n_components = 50  # Using 50 components for better accuracy
-
-TEMPERATURE = 1.0  # More confident predictions
+n_components = 50
+TEMPERATURE = 1.0
 
 def loadMono(filename):
     file_contents = tf.io.read_file(filename)
@@ -176,9 +175,9 @@ def extract_mfcc(segment, sample_rate=48000, n_mfcc=13, n_keep=7):
         segment = segment.numpy()
     segment = np.array(segment, dtype=np.float32)
     mfccs = librosa.feature.mfcc(y=segment, sr=sample_rate, n_mfcc=n_mfcc)
-    mfccs_mean = np.mean(mfccs, axis=1)  # shape (n_mfcc,)
+    mfccs_mean = np.mean(mfccs, axis=1)
     mfccs_mean = np.squeeze(mfccs_mean)
-    mfccs_mean = mfccs_mean[:n_keep]  # Keep only the first n_keep coefficients
+    mfccs_mean = mfccs_mean[:n_keep]
     return mfccs_mean
 
 def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_file='PCACache.npz', n_mfcc=13, n_keep=7):
@@ -187,7 +186,6 @@ def get_all_spectrograms_with_pca(cache_file='SpectrogramCache.npz', pca_cache_f
         data = np.load(pca_cache_file, allow_pickle=True)
         reduced_specs = data['reduced_specs']
         labels = data['labels']
-        # Load MFCCs if present
         if 'mfccs' in data:
             mfccs = data['mfccs']
             features = [np.concatenate([pca_feat, np.squeeze(mfcc_feat)[:n_keep]]) for pca_feat, mfcc_feat in zip(reduced_specs, mfccs)]
@@ -216,4 +214,4 @@ def plot_random_spectrograms(sizePerClass=10):
     samples_to_plot = whistle_samples + click_samples + bp_samples + noise_samples
     plot_all_spectrograms(samples_to_plot)
 
-plot_random_spectrograms(10)
+#plot_random_spectrograms(10)

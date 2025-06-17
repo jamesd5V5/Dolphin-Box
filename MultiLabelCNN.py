@@ -6,7 +6,6 @@ class MultiLabelCNN(nn.Module):
     def __init__(self, input_size=63):
         super(MultiLabelCNN, self).__init__()
         
-        # Shared layers
         self.fc1 = nn.Linear(input_size, 128)
         self.bn1 = nn.BatchNorm1d(128)
         self.dropout1 = nn.Dropout(0.4)
@@ -18,11 +17,8 @@ class MultiLabelCNN(nn.Module):
         self.fc3 = nn.Linear(64, 32)
         self.bn3 = nn.BatchNorm1d(32)
         self.dropout3 = nn.Dropout(0.3)
-        
-        # Classification head (for primary classification)
+
         self.class_head = nn.Linear(32, 4)
-        
-        # Confidence head (for percentage/confidence scores)
         self.confidence_head = nn.Linear(32, 4)
         
         self.activations = {}
@@ -31,7 +27,6 @@ class MultiLabelCNN(nn.Module):
         if len(x.shape) == 3:
             x = x.squeeze(1)
         
-        # Shared feature extraction
         x = F.relu(self.bn1(self.fc1(x)))
         x = self.dropout1(x)
         self.activations['fc1'] = x.detach().cpu()
@@ -44,10 +39,7 @@ class MultiLabelCNN(nn.Module):
         x = self.dropout3(x)
         self.activations['fc3'] = x.detach().cpu()
         
-        # Classification output (for primary classification)
         class_output = self.class_head(x)
-        
-        # Confidence output (for percentage/confidence scores)
         confidence_output = torch.sigmoid(self.confidence_head(x))
         
         return class_output, confidence_output 
